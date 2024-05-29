@@ -72,6 +72,7 @@ const currentLocationBtn = document.querySelector(
   '[data-current-location-btn]'
 );
 const container = document.querySelector('[data-container]');
+const loading = document.querySelector('[data-loading]');
 
 /**
  * Render All Weather Data which is fetched from API
@@ -82,7 +83,6 @@ const container = document.querySelector('[data-container]');
 
 export const updateWeather = function (lat, lon) {
   // console.log(lat, lon);
-
   //현재 위치 버튼 활성화 토글
 
   if (window.location.hast === '#/current-location') {
@@ -90,6 +90,8 @@ export const updateWeather = function (lat, lon) {
   } else {
     currentLocationBtn.removeAttribute('disabled');
   }
+
+  loading.style.display = 'flex';
 
   const currentWeatherSection = document.querySelector(
     '[data-current-weather]'
@@ -228,7 +230,7 @@ export const updateWeather = function (lat, lon) {
         tempList.innerHTML = `
          <div class="card card-sm slider-card">
            <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
-           <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" class="weather-icon" title="${description}">
+           <img src="./images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" class="weather-icon" title="${description}">
            <p class="body-3">${parseInt(temp)}&deg;</p>
          </div>
        `;
@@ -366,6 +368,8 @@ export const updateWeather = function (lat, lon) {
 
       highlightSection.appendChild(card);
     });
+
+    loading.style.display = 'none';
   });
 };
 
